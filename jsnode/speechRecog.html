@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punjabi Speech to Text</title>
+</head>
+<body>
+    <h1>Punjabi Speech to Text</h1>
+    <button id="start">Start Recording</button>
+    <p id="output"></p>
+
+    <script>
+        // Check if the browser supports the Web Speech API
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert("Your browser does not support speech recognition. Please use Chrome or Edge.");
+        } else {
+            const recognition = new SpeechRecognition();
+            recognition.lang = "pa-IN";  // Set language to Punjabi (India)
+            recognition.interimResults = false; // Wait until speech is complete to provide result
+
+            // Start recognition on button click
+            document.getElementById('start').addEventListener('click', () => {
+                recognition.start();
+                document.getElementById('output').textContent = "Listening...";
+            });
+
+            // Handle the result
+            recognition.addEventListener('result', (event) => {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('output').textContent = "Transcript: " + transcript;
+
+                // Optional: Save transcript to a file using a download link
+                const downloadLink = document.createElement('a');
+                downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(transcript);
+                downloadLink.download = 'punjabi_transcript.txt';
+                downloadLink.textContent = 'Download Transcript';
+                document.body.appendChild(downloadLink);
+            });
+
+            // Handle errors
+            recognition.addEventListener('error', (event) => {
+                document.getElementById('output').textContent = "Error occurred: " + event.error;
+            });
+        }
+    </script>
+</body>
+</html>

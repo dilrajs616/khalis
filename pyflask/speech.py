@@ -15,9 +15,10 @@ def stt():
         print("Recognizing...")
         text = recognizer.recognize_google(audio, language="pa-IN")
         print("Transcript in Punjabi: " + text)
+        text = text + "\n"
 
         # Save the transcript to a file
-        with open("punjabi_transcript.txt", "w", encoding="utf-8") as file:
+        with open("punjabi_transcript.txt", "a", encoding="utf-8") as file:
             file.write(text)
         
     except sr.UnknownValueError:

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Search Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-light center-text">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container mb-auto">
+            <a class="navbar-brand" href="#"><h2 class="text-center m-2">Week 5 & 6</h2></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html">Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tests.html">Tested Examples</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+
+    <!-- Hero Section -->
+    <section class="bg-light text-dark text-align-center text-sm-start">
+        <div class="container">
+            
+            <h3 class="mb-0" id="banidb">Mid Term Evaluation</h3>
+            <p class="lead my-4">
+                The Demo Project was not accurate enough. Since the transcript obtained from google-speech-to-text is used directly as the search query for bani-db. Most of the times spellings did not match with gurbani database. So our mentor suggested us following changes in the project.
+                <ul>
+                    <li>Send request to Banidb using 1st search type. (Rather than searching entire word, it should search only the first letter of each word)</li>
+                    <li>Any kind of Visual cue when the mic is recording audio.</li>
+                    <li>Rather than just bani name, it should display a link or entire shabad that matches the search query.</li>
+                </ul>
+            </p> 
+
+            <h3 class="mb-0" id="banidb">Changes Made</h3>
+            <p class="lead my-4">
+                <ol>
+                    <li>Backend adjustment for the first change was pretty straight forward. We thought of the long term use and adjusted the express app code just a little bit. Now the express app takes following 2 paramters in request. </li>
+                    <div class="table-responsive p-4" id="table">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>Variable Name</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>audioData</td>
+                                    <td><pre><code>string:</code></pre> Audio Data in base64 format</td>
+                                </tr>
+                                <tr>
+                                    <td>initials</td>
+                                    <td><pre><code>bool:</code></pre> true or false</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    If the "initials" value is false then the backend will return the normal transcript as it is. But if the value of "initials" variable is true then the backend will return a string that contains the first letter of each word separated with space.
+                    <br><br>
+                    <b><u>First Letter Of Punjabi words: </u></b> In punjabi strings, each letter and "laga'n" "matra" occupies only one index. For example if the string/word is "ਜੇਕਰ" then it's stored as [ਜ, ੇ,ਕ,ਰ]. So to obtain the first letter of each word, we simply take the first index of each string.
+                    <li class="my-1">
+                        For the visual cues we added a glow effect around the mic component. So now when the mic is recording user's voice, it glows. Also there is a notification as pop up that let's user know that the recording has been started and recording has been stopped.
+                    </li>
+                    <li class="my-1">There were a ton of changes made on frontend. The biggest change was adding a dropdown menu that lets user choose from two options. Transcript or Gurbani. As explained in <a href="#table">table above</a> it is to obtain full transcript or only first letter of each word. If user chooses Transcript then they will get only transcript of their voice. But if they choose gurbani then the app will make request to banidb-api and find gurbani that matches with their query <br>Code was completely refactored. Here I would like to commend Simarjot Singh for writing very clean code. He is actually very skilled in making frontend using React. <br>Results section was also changed to match what was suggested by our mentor. </li>
+                    <li>A lot of testing was done again. This time the results were much more consistent with first letter of each word search. Now we could finally move onto the next step which was the implementation in Sikhi To The Max application.</li>
+                </ol>
+            </p>
+            
+
+            <!-- Navigation buttons -->
+            <div class="flex justify-center space-x-4 text-center mb-4 bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">
+            <a href="week1.html">
+                <button>
+                    1
+                </button>
+            </a>
+            <a href="week2.html">
+                <button>
+                    2
+                </button>
+            </a>
+            <a href="week3.html">
+                <button>
+                    3
+                </button>
+            </a>
+            <a href="week4.html">
+                <button>
+                    4
+                </button>
+            </a>
+            <a href="week5.html">
+                <button>
+                    5
+                </button>
+            </a>
+            <a href="week7.html">
+                <button>
+                    7
+                </button>
+            </a>
+            <a href="week8.html">
+                <button>
+                    8
+                </button>
+            </a>
+            <a href="week10.html">
+                <button>
+                    10
+                </button>
+            </a>
+        </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center p-4">
+        <p class="m-0">© 2024 Transcript API's Documentations.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+
+</html>

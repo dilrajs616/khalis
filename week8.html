@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Search Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-light center-text">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container mb-auto">
+            <a class="navbar-brand" href="#">
+                <h2 class="text-center m-2">Week 8 & 9</h2>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html">Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tests.html">Tested Examples</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+
+    <!-- Hero Section -->
+    <section class="bg-light text-dark text-align-center text-sm-start">
+        <div class="container">
+            <h3 class="mb-0" id="banidb">Hosting Express Backend On Google Cloud</h3>
+            <p class="lead my-4">
+                We already had "Enabled Billing" Simarjot Singh's account using our mentor's credit card. So we decided
+                to host the express app on Google Cloud. The problem was that the google cloud project on which billing
+                was enabled was on Simarjot's account. So he added me as a collaborator in the project and I started the
+                horing process.
+            </p>
+
+            <section class="prereqs">
+                <h2 id="before-you-begin" data-text="Before you begin" tabindex="-1" role="presentation"><span
+                        class="devsite-heading" role="heading" aria-level="2">Before you begin</span>
+                </h2>
+
+
+
+                <ol>
+
+
+
+                    <cloudx-free-trial-eligible-content>
+                        <slot slot="eligible">
+
+                            <li>
+
+                                <p>Start by creating a Google Cloud account. With this account, you get $300 in free
+                                    credits,
+                                    plus free usage of over 20 products, up to monthly limits.</p>
+                                <p><a href="https://console.cloud.google.com/freetrial" class="button button-primary"
+                                        target="console" track-type="commonIncludes" track-name="createAnAccount"
+                                        track-metadata-position="prereqs"
+                                        track-metadata-eventdetail="https://console.cloud.google.com/freetrial"
+                                        track-metadata-link-destination="https://console.cloud.google.com/freetrial">Create
+                                        an account</a></p>
+
+                            </li>
+
+
+
+
+                            <li>
+
+
+                                <p>In the Google Cloud console, on the project selector page,
+                                    select or create a Google Cloud project.</p>
+
+
+                                <aside class="note"><b>Note</b>: If you don't plan to keep the
+                                    resources that you create in this procedure, create a project instead of
+                                    selecting an existing project. After you finish these steps, you can
+                                    delete the project, removing all resources associated with the project.</aside>
+
+
+                                <p><a href="https://console.cloud.google.com/projectselector2/home/dashboard"
+                                        target="console" track-type="commonIncludes" track-name="consoleLink"
+                                        track-metadata-end-goal="createProject" class="button button-primary">Go to
+                                        project selector</a></p>
+
+
+                            </li>
+
+
+                            <li>
+
+                                <p>
+                                    <a href="https://cloud.google.com//billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project"
+                                        target="_blank" track-type="commonIncludes" track-name="supportLink"
+                                        track-metadata-end-goal="enableBilling">Make sure that billing is enabled for
+                                        your Google Cloud project</a>.
+                                </p>
+
+                            </li>
+
+
+                            <li>
+                                <a href="https://cloud.google.com/sdk/docs/install" track-type="commonIncludes" track-name="sdkLink"
+                                    target="_blank">Install</a> the Google Cloud CLI.
+                            </li>
+
+                            <li>
+                                <p>
+                                    To <a href="https://cloud.google.com/sdk/docs/initializing" track-type="commonIncludes" track-name="sdkLink"
+                                        target="_blank">initialize</a> the gcloud CLI, run the following command:
+                                </p>
+                                <devsite-code data-copy-event-label="">
+                                    <pre class="lang-sh" translate="no" dir="ltr"
+                                        is-upgraded=""><span class="pln">gcloud init</span></pre>
+                                </devsite-code>
+
+
+
+
+
+
+
+                                <aside class="note"><strong>Note:</strong> If you installed the gcloud CLI
+                                    previously, make sure you have the latest version by running <code translate="no"
+                                        dir="ltr">gcloud components
+                  update</code>.
+                                </aside>
+
+
+                            </li>
+
+
+
+
+
+
+
+
+
+
+
+
+                        </slot>
+                    </cloudx-free-trial-eligible-content>
+
+
+
+
+
+                    <p></p>
+
+                    <p></p>
+                    <li> To set the default project for your Cloud Run service:
+                        <div></div><devsite-code data-copy-event-label="">
+                            <pre class="" translate="no" dir="ltr" is-upgraded=""
+                                syntax="Bash"><span class="devsite-syntax-w"> </span>gcloud<span class="devsite-syntax-w"> </span>config<span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">set</span><span class="devsite-syntax-w"> </span>project<span class="devsite-syntax-w"> </span><devsite-var rendered="" translate="no" is-upgraded="" scope="PROJECT_ID" tabindex="0"><span class="devsite-var-wrapper"><span class="devsite-var-input-wrapper"></span><var spellcheck="false" is-upgraded="" data-title="Edit PROJECT_ID" aria-label="Edit PROJECT_ID">PROJECT_ID</var></span></devsite-var></pre>
+                        </devsite-code>
+                        Replace <var translate="no">PROJECT_ID</var> with your Google Cloud project ID.
+                    </li>
+                    <p></p>
+
+                    <p></p>
+                    <li>
+                        <p>If you are under a domain restriction organization policy <a
+                                href="https://cloud.google.com/run/docs/authenticating/public#domain-restricted-sharing">restricting</a>
+                            unauthenticated invocations for your project, you will need to access your deployed service
+                            as described under <a href="https://cloud.google.com/run/docs/triggering/https-request#testing-private">Testing
+                                private services</a>.</p>
+                    </li>
+                    <li>
+                        <p>Enable the Cloud Run Admin API and the Cloud Build API:</p>
+                        <div>
+                            <div></div><devsite-code data-copy-event-label="">
+                                <pre class="" translate="no" dir="ltr" is-upgraded="" syntax="Bash">gcloud<span class="devsite-syntax-w"> </span>services<span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">enable</span><span class="devsite-syntax-w"> </span>run.googleapis.com<span class="devsite-syntax-w"> </span><span class="devsite-syntax-se">\</span>
+            <span class="devsite-syntax-w">    </span>cloudbuild.googleapis.com</pre>
+                            </devsite-code>
+                        </div>
+                        <p>After the Cloud Run Admin API is enabled, the Compute Engine default service account is
+                            automatically created.</p>
+                    </li>
+                    <p></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <li>For Cloud Build to be able to build your sources, grant the
+                        <a href="https://cloud.google.com/iam/docs/understanding-roles#cloudbuild.builds.builder">Cloud Build Service
+                            Account</a>
+                        role to the Compute Engine default service account by running the following:<p></p>
+                        <div>
+                            <div></div><devsite-code data-copy-event-label="">
+                                <pre class="" translate="no" dir="ltr" is-upgraded=""
+                                    syntax="Bash">gcloud<span class="devsite-syntax-w"> </span>projects<span class="devsite-syntax-w"> </span>add-iam-policy-binding<span class="devsite-syntax-w"> </span><devsite-var rendered="" translate="no" is-upgraded="" scope="PROJECT_ID" tabindex="0"><span class="devsite-var-wrapper"><span class="devsite-var-input-wrapper"></span><var spellcheck="false" is-upgraded="" data-title="Edit PROJECT_ID" aria-label="Edit PROJECT_ID">PROJECT_ID</var></span></devsite-var><span class="devsite-syntax-w"> </span><span class="devsite-syntax-se">\</span>
+            <span class="devsite-syntax-w">    </span>--member<span class="devsite-syntax-o">=</span>serviceAccount:<devsite-var rendered="" translate="no" is-upgraded="" scope="PROJECT_NUMBER" tabindex="0"><span class="devsite-var-wrapper"><span class="devsite-var-input-wrapper"></span><var spellcheck="false" is-upgraded="" data-title="Edit PROJECT_NUMBER" aria-label="Edit PROJECT_NUMBER">PROJECT_NUMBER</var></span></devsite-var>-compute@developer.gserviceaccount.com<span class="devsite-syntax-w"> </span><span class="devsite-syntax-se">\</span>
+            <span class="devsite-syntax-w">    </span>--role<span class="devsite-syntax-o">=</span>roles/cloudbuild.builds.builder</pre>
+                            </devsite-code>
+                        </div>
+                        <p>Replace <code translate="no" dir="ltr"><var translate="no">PROJECT_NUMBER</var></code> with
+                            your Google Cloud
+                            project number, and <code translate="no"
+                                dir="ltr"><var translate="no">PROJECT_ID</var></code> with your Google Cloud
+                            project ID. For detailed instructions on how to find your project ID, and project number,
+                            see <a
+                                href="https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects">Creating
+                                and managing projects</a>.</p>
+                        <p>Granting the Cloud Build Service Account role to the Compute Engine default service account
+                            takes a couple of minutes to <a href="https://cloud.google.com/iam/docs/access-change-propagation">propagate</a>.
+                        </p>
+                        <aside class="note">
+                            <b>Note:</b>
+                            <p>
+                                The <a
+                                    href="https://cloud.google.com/resource-manager/docs/organization-policy/restricting-service-accounts#disable_service_account_default_grants">
+                                    <code translate="no"
+                                        dir="ltr">iam.automaticIamGrantsForDefaultServiceAccounts</code> organization
+                                    policy constraint</a>
+                                prevents the Editor role from being automatically granted to default service accounts.
+                                If you
+                                created your organization after May 3, 2024, this constraint is enforced by
+                                default.
+                            </p>
+                            <p>
+                                We strongly recommend that you enforce this constraint to disable the automatic role
+                                grant. If you
+                                disable the automatic role grant, you must decide which roles to grant to the default
+                                service
+                                accounts, and then <a href="https://cloud.google.com/iam/docs/granting-changing-revoking-access">grant these
+                                    roles</a>
+                                yourself.
+                            </p>
+                            <p>
+                                If the default service account already has the Editor role, we recommend that you
+                                replace the
+                                Editor role with less permissive roles. To safely modify the service account's roles,
+                                use <a href="https://cloud.google.com/policy-intelligence/docs/simulate-iam-policies">Policy Simulator</a> to
+                                see the impact of
+                                the change, and then <a href="https://cloud.google.com/iam/docs/granting-changing-revoking-access">grant and
+                                    revoke the
+                                    appropriate roles</a>.
+                            </p>
+
+                        </aside>
+                    </li>
+
+                    <p></p>
+                </ol>
+                <p></p>
+
+
+            </section>
+
+            <section class="steps">
+
+
+                <h2 id="writing" data-text="Write the sample service" tabindex="-1" role="presentation"><span
+                        class="devsite-heading" role="heading" aria-level="2">Write the sample service</span><button
+                        type="button" class="devsite-heading-link button-flat material-icons"
+                        aria-label="Copy link to this section: Write the sample service"
+                        data-title="Copy link to this section: Write the sample service" data-id="writing"></button>
+                </h2>
+
+                <p></p>
+
+                <p>To create and deploy a Node.js service, follow these steps:</p>
+
+                <ol>
+                    <li>
+                        <p>Create a new directory named <code translate="no" dir="ltr">helloworld</code> and change
+                            directory
+                            into it:</p>
+                        <div></div><devsite-code data-copy-event-label="">
+                            <div class="devsite-code-buttons-container" role="group" aria-label="Action buttons">
+                                <div class="devsite-code-buttons-flex-container">
+                                    <div class="devsite-code-cta-popout-button-wrapper"><devsite-feature-tooltip
+                                            ack-key="AckDevsiteCodeMoreActionsDismiss" id="devsite-code-cta-popout"
+                                            close-button-text="View" dismiss-button="" managed="" rendered=""
+                                            current-step="0" style="--devsite-popout-offset-x: 32px;"></devsite-feature-tooltip></div>
+                                </div>
+                                <div class="devsite-code-cta-popout" aria-labelledby="devsite-code-cta-dropdown-button"
+                                    hidden=""><!---->
+                                    <!--?lit$709626091$-->
+                                    <!--?lit$709626091$-->
+                                    <!--?lit$709626091$-->
+                                    <!--?lit$709626091$-->
+                                    <div class="devsite-code-cta-button gc-analytics-event devsite-toggle-light"
+                                        data-category="Site-Wide Custom Events" data-label="Light Code Toggle"
+                                        track-type="exampleCode" track-name="lightCodeToggle"><button type="button"
+                                            class="gc-analytics-event material-icons devsite-icon-code-light devsite-toggle-light"
+                                            data-category="Site-Wide Custom Events" data-label="Light Code Toggle"
+                                            track-type="exampleCode" track-name="lightCodeToggle"
+                                            aria-label="Light code theme" data-title="Light code theme"></button>
+                                        <span id="devsite-code-light-label">
+                                            <!--?lit$709626091$-->Light code theme</span>
+                                    </div>
+                                    <!--?lit$709626091$-->
+                                    <div class="devsite-code-cta-button gc-analytics-event devsite-toggle-dark"
+                                        data-category="Site-Wide Custom Events" data-label="Dark Code Toggle"
+                                        track-type="exampleCode" track-name="darkCodeToggle"><button type="button"
+                                            class="gc-analytics-event material-icons devsite-icon-code-dark devsite-toggle-dark"
+                                            data-category="Site-Wide Custom Events" data-label="Dark Code Toggle"
+                                            track-type="exampleCode" track-name="darkCodeToggle"
+                                            aria-label="Dark code theme" data-title="Dark code theme"></button>
+                                        <span id="devsite-code-dark-label"> <!--?lit$709626091$-->Dark code theme</span>
+                                    </div>
+                                    <!--?lit$709626091$-->
+                                </div>
+                            </div>
+                            <pre class="" translate="no" dir="ltr" is-upgraded="" syntax="Text only"><code translate="no" dir="ltr">mkdir helloworld
+cd helloworld
+                </code></pre>
+                        </devsite-code>
+                    </li>
+                    <li>
+                        <p>Create a <code translate="no" dir="ltr">package.json</code> file with the following contents:
+                        </p>
+
+                        <div class="github-docwidget-gitinclude-code">
+
+                            <div></div><devsite-code data-copy-event-label="">
+                                <div class="devsite-code-buttons-container" role="group" aria-label="Action buttons">
+                                    <div class="devsite-code-buttons-flex-container">
+                                        <div class="devsite-code-cta-popout-button-wrapper"><devsite-feature-tooltip
+                                                ack-key="AckDevsiteCodeMoreActionsDismiss" id="devsite-code-cta-popout"
+                                                close-button-text="View" dismiss-button="" managed="" rendered=""
+                                                current-step="0" style="--devsite-popout-offset-x: 32px;"></devsite-feature-tooltip></div>
+                                    </div>
+                                    <div class="devsite-code-cta-popout"
+                                        aria-labelledby="devsite-code-cta-dropdown-button" hidden=""><!---->
+                                        <!--?lit$709626091$--><a class="devsite-code-cta-button cloud-shell-button"
+                                            rel="nofollow" target="console"
+                                            href="https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/nodejs-docs-samples&amp;cloudshell_open_in_editor=/run/helloworld/package.docs.json"
+                                            track-type="openInCloudShell"
+                                            track-name="GoogleCloudPlatform/nodejs-docs-samples"
+                                            track-metadata-snippet-file-url="https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/HEAD/run/helloworld/package.docs.json"
+                                            track-metadata-lang="nodejs"><button class="cloud-shell-icon"><svg
+                                                    width="22" height="18" viewBox="0 0 22 18" fill="currentColor"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M20 0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H20C21.1 18 22 17.1 22 16V2C22 0.9 21.1 0 20 0ZM20 16.01H2V1.99H20V16.01Z">
+                                                    </path>
+                                                    <path
+                                                        d="M6.87574 6H4.72426C4.45699 6 4.32314 6.32314 4.51213 6.51213L7.78787 9.78787C7.90503 9.90503 7.90503 10.095 7.78787 10.2121L4.51213 13.4879C4.32314 13.6769 4.45699 14 4.72426 14H6.87574C6.9553 14 7.03161 13.9684 7.08787 13.9121L10.7879 10.2121C10.905 10.095 10.905 9.90503 10.7879 9.78787L7.08787 6.08787C7.03161 6.03161 6.9553 6 6.87574 6Z">
+                                                    </path>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M4.51213 6.51213C4.32314 6.32314 4.45699 6 4.72426 6H6.87574C6.9553 6 7.03161 6.03161 7.08787 6.08787L10.7879 9.78787C10.905 9.90503 10.905 10.095 10.7879 10.2121L7.08787 13.9121C7.03161 13.9684 6.9553 14 6.87574 14H4.72426C4.45699 14 4.32314 13.6769 4.51213 13.4879L7.78787 10.2121C7.90503 10.095 7.90503 9.90503 7.78787 9.78787L4.51213 6.51213ZM6.41421 7L8.49497 9.08076C9.00266 9.58844 9.00266 10.4116 8.49497 10.9192L6.41421 13H6.58579L9.58579 10L6.58579 7H6.41421Z">
+                                                    </path>
+                                                    <path
+                                                        d="M11 13.7V12.3C11 12.1343 11.1343 12 11.3 12H17.7C17.8657 12 18 12.1343 18 12.3V13.7C18 13.8657 17.8657 14 17.7 14H11.3C11.1343 14 11 13.8657 11 13.7Z">
+                                                    </path>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M11 12.3V13.7C11 13.8657 11.1343 14 11.3 14H17.7C17.8657 14 18 13.8657 18 13.7V12.3C18 12.1343 17.8657 12 17.7 12H11.3C11.1343 12 11 12.1343 11 12.3Z">
+                                                    </path>
+                                                </svg></button><span>Open in Editor</span></a>
+                                        <!--?lit$709626091$--><a class="devsite-code-cta-button github-button"
+                                            rel="nofollow" target="_blank"
+                                            href="https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/HEAD/run/helloworld/package.docs.json"
+                                            track-type="viewOnGithub"
+                                            track-name="GoogleCloudPlatform/nodejs-docs-samples"
+                                            track-metadata-snippet-file-url="https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/HEAD/run/helloworld/package.docs.json"
+                                            track-metadata-lang="nodejs"><button class="github-icon"><svg width="20px"
+                                                    height="20px" viewBox="0 0 20 20" version="1.1"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                    <g stroke="none" stroke-width="1" fill-rule="evenodd">
+                                                        <g transform="translate(-66.000000, -644.000000)">
+                                                            <g transform="translate(40.000000, 142.000000)">
+                                                                <g transform="translate(24.000000, 500.000000)">
+                                                                    <g transform="translate(2.000000, 2.000000)">
+                                                                        <path
+                                                                            d="M10,0 C4.47833333,0 0,4.4775 0,10 C0,14.4183333 2.865,18.1666667 6.83916667,19.4891667 C7.33833333,19.5816667 7.5,19.2716667 7.5,19.0083333 L7.5,17.1466667 C4.71833333,17.7516667 4.13916667,15.9666667 4.13916667,15.9666667 C3.68416667,14.8108333 3.02833333,14.5033333 3.02833333,14.5033333 C2.12083333,13.8825 3.0975,13.8958333 3.0975,13.8958333 C4.10166667,13.9658333 4.63,14.9266667 4.63,14.9266667 C5.52166667,16.455 6.96916667,16.0133333 7.54,15.7575 C7.62916667,15.1116667 7.88833333,14.67 8.175,14.4208333 C5.95416667,14.1666667 3.61916667,13.3091667 3.61916667,9.47833333 C3.61916667,8.38583333 4.01,7.49416667 4.64916667,6.79416667 C4.54583333,6.54166667 4.20333333,5.52416667 4.74666667,4.1475 C4.74666667,4.1475 5.58666667,3.87916667 7.4975,5.1725 C8.295,4.95083333 9.15,4.84 10,4.83583333 C10.85,4.84 11.7058333,4.95083333 12.505,5.1725 C14.4141667,3.87916667 15.2525,4.1475 15.2525,4.1475 C15.7966667,5.525 15.4541667,6.5425 15.3508333,6.79416667 C15.9925,7.49416667 16.38,8.38666667 16.38,9.47833333 C16.38,13.3191667 14.0408333,14.165 11.8141667,14.4125 C12.1725,14.7225 12.5,15.3308333 12.5,16.2641667 L12.5,19.0083333 C12.5,19.2741667 12.66,19.5866667 13.1675,19.4883333 C17.1383333,18.1641667 20,14.4166667 20,10 C20,4.4775 15.5225,0 10,0 Z">
+                                                                        </path>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg></button><span>View on GitHub</span></a>
+                                        <!--?lit$709626091$-->
+                                        <!--?lit$709626091$-->
+                                        <div class="devsite-code-cta-button gc-analytics-event devsite-toggle-light"
+                                            data-category="Site-Wide Custom Events" data-label="Light Code Toggle"
+                                            track-type="exampleCode" track-name="lightCodeToggle"><button type="button"
+                                                class="gc-analytics-event material-icons devsite-icon-code-light devsite-toggle-light"
+                                                data-category="Site-Wide Custom Events" data-label="Light Code Toggle"
+                                                track-type="exampleCode" track-name="lightCodeToggle"
+                                                aria-label="Light code theme" data-title="Light code theme"></button>
+                                            <span id="devsite-code-light-label">
+                                                <!--?lit$709626091$-->Light code theme</span>
+                                        </div>
+                                        <!--?lit$709626091$-->
+                                        <div class="devsite-code-cta-button gc-analytics-event devsite-toggle-dark"
+                                            data-category="Site-Wide Custom Events" data-label="Dark Code Toggle"
+                                            track-type="exampleCode" track-name="darkCodeToggle"><button type="button"
+                                                class="gc-analytics-event material-icons devsite-icon-code-dark devsite-toggle-dark"
+                                                data-category="Site-Wide Custom Events" data-label="Dark Code Toggle"
+                                                track-type="exampleCode" track-name="darkCodeToggle"
+                                                aria-label="Dark code theme" data-title="Dark code theme"></button>
+                                            <span id="devsite-code-dark-label"> <!--?lit$709626091$-->Dark code
+                                                theme</span>
+                                        </div>
+                                        <!--?lit$709626091$-->
+                                    </div>
+                                </div>
+                                <pre suppresswarning="suppresswarning" translate="no" class=""
+                                    track-metadata-position="GoogleCloudPlatform/nodejs-docs-samples/run/helloworld/package.docs.json/HEAD/"
+                                    data-code-snippet="true"
+                                    data-github-includecode-link="https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/HEAD/run/helloworld/package.docs.json"
+                                    language="nodejs"
+                                    data-github-path="GoogleCloudPlatform/nodejs-docs-samples/run/helloworld/package.docs.json"
+                                    data-git-revision="HEAD" dir="ltr" is-upgraded="" syntax="JSON"><code translate="no" dir="ltr"><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-nt">"name"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"helloworld"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-nt">"description"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"Simple hello world sample in Node"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-nt">"version"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"1.0.0"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-nt">"private"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kc">true</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-nt">"main"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"index.js"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-nt">"type"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"module"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-nt">"scripts"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"start"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"node index.js"</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-nt">"engines"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"node"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"&gt;=16.0.0"</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">},</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-nt">"author"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"Google LLC"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-nt">"license"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"Apache-2.0"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-nt">"dependencies"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">    </span><span class="devsite-syntax-nt">"express"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s2">"^4.17.1"</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-p">}</span>
+<span class="devsite-syntax-p">}</span>
+                </code></pre>
+                            </devsite-code>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </li>
+                    <li>
+                        <p>In the same directory, create a <code translate="no" dir="ltr">index.js</code> file, and copy
+                            the following
+                            lines into it:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <div class="github-docwidget-gitinclude-code">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <div></div><devsite-code data-copy-event-label="">
+                                <div class="devsite-code-buttons-container" role="group" aria-label="Action buttons">
+                                    <div class="devsite-code-buttons-flex-container">
+                                        <div class="devsite-code-cta-popout-button-wrapper"><devsite-feature-tooltip
+                                                ack-key="AckDevsiteCodeMoreActionsDismiss" id="devsite-code-cta-popout"
+                                                close-button-text="View" dismiss-button="" managed="" rendered=""
+                                                current-step="0" style="--devsite-popout-offset-x: 32px;"></devsite-feature-tooltip></div>
+                                    </div>
+                                    <div class="devsite-code-cta-popout"
+                                        aria-labelledby="devsite-code-cta-dropdown-button" hidden=""><!---->
+                                        <!--?lit$709626091$--><a class="devsite-code-cta-button cloud-shell-button"
+                                            rel="nofollow" target="console"
+                                            href="https://shell.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/nodejs-docs-samples&amp;cloudshell_open_in_editor=/run/helloworld/index.js"
+                                            track-type="openInCloudShell"
+                                            track-name="GoogleCloudPlatform/nodejs-docs-samples"
+                                            track-metadata-snippet-file-url="https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/HEAD/run/helloworld/index.js"
+                                            track-metadata-position="cloudrun_helloworld_service"
+                                            track-metadata-lang="nodejs"><button class="cloud-shell-icon"><svg
+                                                    width="22" height="18" viewBox="0 0 22 18" fill="currentColor"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M20 0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H20C21.1 18 22 17.1 22 16V2C22 0.9 21.1 0 20 0ZM20 16.01H2V1.99H20V16.01Z">
+                                                    </path>
+                                                    <path
+                                                        d="M6.87574 6H4.72426C4.45699 6 4.32314 6.32314 4.51213 6.51213L7.78787 9.78787C7.90503 9.90503 7.90503 10.095 7.78787 10.2121L4.51213 13.4879C4.32314 13.6769 4.45699 14 4.72426 14H6.87574C6.9553 14 7.03161 13.9684 7.08787 13.9121L10.7879 10.2121C10.905 10.095 10.905 9.90503 10.7879 9.78787L7.08787 6.08787C7.03161 6.03161 6.9553 6 6.87574 6Z">
+                                                    </path>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M4.51213 6.51213C4.32314 6.32314 4.45699 6 4.72426 6H6.87574C6.9553 6 7.03161 6.03161 7.08787 6.08787L10.7879 9.78787C10.905 9.90503 10.905 10.095 10.7879 10.2121L7.08787 13.9121C7.03161 13.9684 6.9553 14 6.87574 14H4.72426C4.45699 14 4.32314 13.6769 4.51213 13.4879L7.78787 10.2121C7.90503 10.095 7.90503 9.90503 7.78787 9.78787L4.51213 6.51213ZM6.41421 7L8.49497 9.08076C9.00266 9.58844 9.00266 10.4116 8.49497 10.9192L6.41421 13H6.58579L9.58579 10L6.58579 7H6.41421Z">
+                                                    </path>
+                                                    <path
+                                                        d="M11 13.7V12.3C11 12.1343 11.1343 12 11.3 12H17.7C17.8657 12 18 12.1343 18 12.3V13.7C18 13.8657 17.8657 14 17.7 14H11.3C11.1343 14 11 13.8657 11 13.7Z">
+                                                    </path>
+                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                        d="M11 12.3V13.7C11 13.8657 11.1343 14 11.3 14H17.7C17.8657 14 18 13.8657 18 13.7V12.3C18 12.1343 17.8657 12 17.7 12H11.3C11.1343 12 11 12.1343 11 12.3Z">
+                                                    </path>
+                                                </svg></button><span>Open in Editor</span></a>
+                                        <!--?lit$709626091$--><a class="devsite-code-cta-button github-button"
+                                            rel="nofollow" target="_blank"
+                                            href="https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/HEAD/run/helloworld/index.js"
+                                            track-type="viewOnGithub"
+                                            track-name="GoogleCloudPlatform/nodejs-docs-samples"
+                                            track-metadata-snippet-file-url="https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/HEAD/run/helloworld/index.js"
+                                            track-metadata-position="cloudrun_helloworld_service"
+                                            track-metadata-lang="nodejs"><button class="github-icon"><svg width="20px"
+                                                    height="20px" viewBox="0 0 20 20" version="1.1"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                    <g stroke="none" stroke-width="1" fill-rule="evenodd">
+                                                        <g transform="translate(-66.000000, -644.000000)">
+                                                            <g transform="translate(40.000000, 142.000000)">
+                                                                <g transform="translate(24.000000, 500.000000)">
+                                                                    <g transform="translate(2.000000, 2.000000)">
+                                                                        <path
+                                                                            d="M10,0 C4.47833333,0 0,4.4775 0,10 C0,14.4183333 2.865,18.1666667 6.83916667,19.4891667 C7.33833333,19.5816667 7.5,19.2716667 7.5,19.0083333 L7.5,17.1466667 C4.71833333,17.7516667 4.13916667,15.9666667 4.13916667,15.9666667 C3.68416667,14.8108333 3.02833333,14.5033333 3.02833333,14.5033333 C2.12083333,13.8825 3.0975,13.8958333 3.0975,13.8958333 C4.10166667,13.9658333 4.63,14.9266667 4.63,14.9266667 C5.52166667,16.455 6.96916667,16.0133333 7.54,15.7575 C7.62916667,15.1116667 7.88833333,14.67 8.175,14.4208333 C5.95416667,14.1666667 3.61916667,13.3091667 3.61916667,9.47833333 C3.61916667,8.38583333 4.01,7.49416667 4.64916667,6.79416667 C4.54583333,6.54166667 4.20333333,5.52416667 4.74666667,4.1475 C4.74666667,4.1475 5.58666667,3.87916667 7.4975,5.1725 C8.295,4.95083333 9.15,4.84 10,4.83583333 C10.85,4.84 11.7058333,4.95083333 12.505,5.1725 C14.4141667,3.87916667 15.2525,4.1475 15.2525,4.1475 C15.7966667,5.525 15.4541667,6.5425 15.3508333,6.79416667 C15.9925,7.49416667 16.38,8.38666667 16.38,9.47833333 C16.38,13.3191667 14.0408333,14.165 11.8141667,14.4125 C12.1725,14.7225 12.5,15.3308333 12.5,16.2641667 L12.5,19.0083333 C12.5,19.2741667 12.66,19.5866667 13.1675,19.4883333 C17.1383333,18.1641667 20,14.4166667 20,10 C20,4.4775 15.5225,0 10,0 Z">
+                                                                        </path>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg></button><span>View on GitHub</span></a>
+                                        <!--?lit$709626091$-->
+                                        <!--?lit$709626091$-->
+                                        <div class="devsite-code-cta-button gc-analytics-event devsite-toggle-light"
+                                            data-category="Site-Wide Custom Events" data-label="Light Code Toggle"
+                                            track-type="exampleCode" track-name="lightCodeToggle"><button type="button"
+                                                class="gc-analytics-event material-icons devsite-icon-code-light devsite-toggle-light"
+                                                data-category="Site-Wide Custom Events" data-label="Light Code Toggle"
+                                                track-type="exampleCode" track-name="lightCodeToggle"
+                                                aria-label="Light code theme" data-title="Light code theme"></button>
+                                            <span id="devsite-code-light-label">
+                                                <!--?lit$709626091$-->Light code theme</span>
+                                        </div>
+                                        <!--?lit$709626091$-->
+                                        <div class="devsite-code-cta-button gc-analytics-event devsite-toggle-dark"
+                                            data-category="Site-Wide Custom Events" data-label="Dark Code Toggle"
+                                            track-type="exampleCode" track-name="darkCodeToggle"><button type="button"
+                                                class="gc-analytics-event material-icons devsite-icon-code-dark devsite-toggle-dark"
+                                                data-category="Site-Wide Custom Events" data-label="Dark Code Toggle"
+                                                track-type="exampleCode" track-name="darkCodeToggle"
+                                                aria-label="Dark code theme" data-title="Dark code theme"></button>
+                                            <span id="devsite-code-dark-label"> <!--?lit$709626091$-->Dark code
+                                                theme</span>
+                                        </div>
+                                        <!--?lit$709626091$--><devsite-feedback class="devsite-code-cta-button"
+                                            product-id="1634365" bucket="serverless"
+                                            context="{&quot;language&quot;: &quot;nodejs&quot;, &quot;region_tag&quot;: &quot;cloudrun_helloworld_service&quot;, &quot;snippet_file_url&quot;: &quot;https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/HEAD/run/helloworld/index.js&quot;}"
+                                            data-label="Send Feedback" position="devsite-code" project-feedback-url=""
+                                            track-name="sendFeedback" track-type="exampleCode"
+                                            track-metadata-lang="nodejs" track-metadata-position="content"
+                                            track-metadata-snippet-file-url="cloudrun_helloworld_service"
+                                            project-name="Google Cloud"
+                                            project-icon="https://www.gstatic.com/devrel-devsite/prod/vb4766d511641fb9a17edf27ece72c6c6ca056c75a92d2c9b1f18896d7eaaa135/cloud/images/favicons/onecloud/super_cloud.png"><button
+                                                type="button"
+                                                class="gc-analytics-event material-icons send-feedback-icon"
+                                                data-category="Site-Wide Custom Events"></button><span>Send
+                                                feedback</span></devsite-feedback>
+                                    </div>
+                                </div>
+                                <pre suppresswarning="suppresswarning" translate="no" class=""
+                                    track-metadata-position="GoogleCloudPlatform/nodejs-docs-samples/run/helloworld/index.js/HEAD/cloudrun_helloworld_service"
+                                    data-code-snippet="true"
+                                    data-github-includecode-link="https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/HEAD/run/helloworld/index.js"
+                                    feedback-context="{&quot;language&quot;: &quot;nodejs&quot;, &quot;region_tag&quot;: &quot;cloudrun_helloworld_service&quot;, &quot;snippet_file_url&quot;: &quot;https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/HEAD/run/helloworld/index.js&quot;}"
+                                    feedback-product="1634365" feedback-bucket="serverless" language="nodejs"
+                                    data-github-path="GoogleCloudPlatform/nodejs-docs-samples/run/helloworld/index.js"
+                                    data-git-revision="HEAD" data-region-tag="cloudrun_helloworld_service" dir="ltr"
+                                    is-upgraded="" syntax="JavaScript"><code translate="no" dir="ltr"><span class="devsite-syntax-k">import</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">express</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-kr">from</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'express'</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">app</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">express</span><span class="devsite-syntax-p">();</span>
+
+<span class="devsite-syntax-nx">app</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">get</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-s1">'/'</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">req</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">res</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">name</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">process</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">env</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">NAME</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">||</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s1">'World'</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-nx">res</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">send</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-sb">`Hello </span><span class="devsite-syntax-si">${</span><span class="devsite-syntax-nx">name</span><span class="devsite-syntax-si">}</span><span class="devsite-syntax-sb">!`</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-p">});</span>
+
+<span class="devsite-syntax-kd">const</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">port</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nb">parseInt</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">process</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">env</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">PORT</span><span class="devsite-syntax-p">)</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">||</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-mf">8080</span><span class="devsite-syntax-p">;</span>
+<span class="devsite-syntax-nx">app</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">listen</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-nx">port</span><span class="devsite-syntax-p">,</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">()</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-o">=</span>&gt;<span class="devsite-syntax-w"> </span><span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-nx">console</span><span class="devsite-syntax-p">.</span><span class="devsite-syntax-nx">log</span><span class="devsite-syntax-p">(</span><span class="devsite-syntax-sb">`helloworld: listening on port </span><span class="devsite-syntax-si">${</span><span class="devsite-syntax-nx">port</span><span class="devsite-syntax-si">}</span><span class="devsite-syntax-sb">`</span><span class="devsite-syntax-p">);</span>
+<span class="devsite-syntax-p">});</span></code></pre>
+                            </devsite-code>
+                        </div>
+
+                        <p>This code creates a basic web server that listens on the port defined by the
+                            <a href="https://cloud.google.com/run/docs/reference/container-contract#port"><code translate="no"
+                                    dir="ltr">PORT</code> environment variable</a>.
+                        </p>
+                    </li>
+                </ol>
+
+                <p>Your app is finished and ready to be deployed.</p>
+
+                <h2 id="deploy" data-text="Deploy to Cloud Run from source" tabindex="-1" role="presentation"><span
+                        class="devsite-heading" role="heading" aria-level="2">Deploy to Cloud Run from
+                        source</span><button type="button" class="devsite-heading-link button-flat material-icons"
+                        aria-label="Copy link to this section: Deploy to Cloud Run from source"
+                        data-title="Copy link to this section: Deploy to Cloud Run from source"
+                        data-id="deploy"></button></h2>
+
+                <p></p>
+                <p class="special"><b>Important:</b> This quickstart assumes that you have owner or editor roles in the
+                    project you are using for the quickstart. Otherwise, refer to the <a
+                        href="https://cloud.google.com/run/docs/reference/iam/roles#run.sourceDeveloper">Cloud Run Source Developer role</a> for
+                    the required permissions for deploying a Cloud Run resource from source.</p>
+                <p></p>
+
+                <p>Deploy from source automatically builds a container image from source code
+                    and deploys it.</p>
+
+                <p>To deploy from source:</p>
+
+                <ol>
+                    <li>
+                        <p>In your source code directory, deploy the current folder using the following command:</p>
+
+                        <div></div><devsite-code data-copy-event-label="">
+                            <div class="devsite-code-buttons-container" role="group" aria-label="Action buttons">
+                                <div class="devsite-code-buttons-flex-container">
+                                    <div class="devsite-code-cta-popout-button-wrapper"><devsite-feature-tooltip
+                                            ack-key="AckDevsiteCodeMoreActionsDismiss" id="devsite-code-cta-popout"
+                                            close-button-text="View" dismiss-button="" managed="" rendered=""
+                                            current-step="0" style="--devsite-popout-offset-x: 32px;"></devsite-feature-tooltip></div>
+                                </div>
+                                <div class="devsite-code-cta-popout" aria-labelledby="devsite-code-cta-dropdown-button"
+                                    hidden=""><!---->
+                                    <!--?lit$709626091$-->
+                                    <!--?lit$709626091$-->
+                                    <!--?lit$709626091$-->
+                                    <!--?lit$709626091$-->
+                                    <div class="devsite-code-cta-button gc-analytics-event devsite-toggle-light"
+                                        data-category="Site-Wide Custom Events" data-label="Light Code Toggle"
+                                        track-type="exampleCode" track-name="lightCodeToggle"><button type="button"
+                                            class="gc-analytics-event material-icons devsite-icon-code-light devsite-toggle-light"
+                                            data-category="Site-Wide Custom Events" data-label="Light Code Toggle"
+                                            track-type="exampleCode" track-name="lightCodeToggle"
+                                            aria-label="Light code theme" data-title="Light code theme"></button>
+                                        <span id="devsite-code-light-label">
+                                            <!--?lit$709626091$-->Light code theme</span>
+                                    </div>
+                                    <!--?lit$709626091$-->
+                                    <div class="devsite-code-cta-button gc-analytics-event devsite-toggle-dark"
+                                        data-category="Site-Wide Custom Events" data-label="Dark Code Toggle"
+                                        track-type="exampleCode" track-name="darkCodeToggle"><button type="button"
+                                            class="gc-analytics-event material-icons devsite-icon-code-dark devsite-toggle-dark"
+                                            data-category="Site-Wide Custom Events" data-label="Dark Code Toggle"
+                                            track-type="exampleCode" track-name="darkCodeToggle"
+                                            aria-label="Dark code theme" data-title="Dark code theme"></button>
+                                        <span id="devsite-code-dark-label"> <!--?lit$709626091$-->Dark code theme</span>
+                                    </div>
+                                    <!--?lit$709626091$-->
+                                </div>
+                            </div>
+                            <pre class="" translate="no" dir="ltr" is-upgraded=""
+                                syntax="Bash">gcloud<span class="devsite-syntax-w"> </span>run<span class="devsite-syntax-w"> </span>deploy<span class="devsite-syntax-w"> </span>--source<span class="devsite-syntax-w"> </span>.</pre>
+                        </devsite-code>
+
+                        <ol>
+                            <li>
+                                <p>When you are prompted for the service name, press Enter to accept the
+                                    default name, for example <code translate="no" dir="ltr">helloworld</code>.</p>
+                            </li>
+                            <li>
+                                <p>If you are prompted to enable additional APIs on the project,
+                                    for example, the Artifact Registry API, respond by pressing
+                                    <code translate="no" dir="ltr">y</code>.
+                                </p>
+                            </li>
+                            <li>
+                                <p>When you are prompted for region: select the <a href="#follow-cloud-run"
+                                        style="border-bottom: 1px dotted #999" data-modal-dialog-id="regions"
+                                        class="devsite-dialog-button">region</a>
+                                    of your choice, for example <code translate="no" dir="ltr">us-central1</code>.</p>
+                            </li>
+                            <li>
+                                <p>If you are prompted to create a repository in the specified region, respond by
+                                    pressing <code translate="no" dir="ltr">y</code>.</p>
+                            </li>
+                            <li>
+                                <p>If you are prompted to <em>allow unauthenticated invocations</em>:
+                                    respond <code translate="no" dir="ltr">y</code>. You might not see this prompt if
+                                    there is a domain
+                                    restriction organization policy that prevents it; for more details see the
+                                    <a href="#before-you-begin">Before you begin</a> section.
+                                </p>
+                            </li>
+                        </ol>
+
+                        <p>Then wait a few moments until the deployment is complete. On success, the
+                            command line displays the service URL.</p>
+                    </li>
+                    <li>
+                        <p>Visit your deployed service by opening the service URL in a web browser.</p>
+                    </li>
+                </ol>
+
+            </section>
+
+            <h3 class="mb-0">Errors That I Encountered</h3>
+            <p>During the initialization step, I was encountering the following error <br><img class="my-3" src="image.png" alt="Error message"> Basically, it is saying that I do not have the access to activate googleapis for this project from my account. That means I did not have administrative previliges. Even though Simarjot had granted me complete access to the project, this error message kept on showing. Then after so many attempts, one time it suddenly worked and out endpoint is now hosted on <a href="https://punjabi-transcript-82115345315.asia-southeast2.run.app/transcript">https://punjabi-transcript-82115345315.asia-southeast2.run.app/transcript</a>.</p>
+
+            <!-- Navigation buttons -->
+            <div class="flex justify-center space-x-4 text-center mb-4 bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">
+            <a href="week1.html">
+                <button>
+                    1
+                </button>
+            </a>
+            <a href="week2.html">
+                <button>
+                    2
+                </button>
+            </a>
+            <a href="week3.html">
+                <button>
+                    3
+                </button>
+            </a>
+            <a href="week4.html">
+                <button>
+                    4
+                </button>
+            </a>
+            <a href="week5.html">
+                <button>
+                    5
+                </button>
+            </a>
+            <a href="week7.html">
+                <button>
+                    7
+                </button>
+            </a>
+            <a href="week8.html">
+                <button>
+                    8
+                </button>
+            </a>
+            <a href="week10.html">
+                <button>
+                    10
+                </button>
+            </a>
+        </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center p-4">
+        <p class="m-0">© 2024 Transcript API's Documentations.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Search Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-light center-text">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container mb-auto">
+            <a class="navbar-brand" href="#"><h2 class="text-center m-2">Week 4</h2></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html">Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tests.html">Tested Examples</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+
+    <!-- Hero Section -->
+    <section class="bg-light text-dark text-align-center text-sm-start">
+        <div class="container">
+            <p class="lead my-4">
+                We have completed the testing phase. And Google api has given the most accurate results in testings. So we will be using that in our project. Here are all the <a href="tests.html">Tested Examples.</a>
+            </p>
+            <h3 class="mb-0" id="banidb">Using BaniDB locally</h3>
+            <p class="lead my-4">
+                I thought of running the BaniDB locally on my device. For this, I cloned the GitHub repo: <br> <pre><code>https://github.com/KhalisFoundation/banidb-api</code></pre>
+            </p>
+            <h3 class="mb-0" id="openSSL">Installing openSSL</h3>
+            <p class="lead my-4">
+                But <code>npm install</code> was not working as intended. It kept showing me errors that I frankly did not understand. It was related to <a href="https://www.openssl.org/">OpenSSL</a>. Then I started downloading openSSL on my device. I have a windows device. I could not find a direct source from where I can download openSSL for windows. Then i found a <a href="https://stackoverflow.com/questions/76331564/how-to-install-openssl-from-source-on-windows-10-11">post</a> on stackoverflow from where I found a <a href="https://github.com/openssl/openssl/blob/master/NOTES-WINDOWS.md#quick-start">link</a> to download openSSL on windows. There, first two steps were to install <a href="https://strawberryperl.com/">PERL</a> and <a href="https://www.nasm.us/">NASM</a>. Then I added them to path. Long story short, it didn't work.
+            </p>
+            <h3 class="" id="planning">Planning Phase</h3>
+            <p class="lead my-4">
+                Me and Simarjot Singh did several online meets where we discussed about the demo project. The layout, flow and tech stack was decided after discussion in these meets. Simarjot Singh, with the help of our mentor Inder Veerji, bought the paid plan of google cloud. So we could use the google-speech-to-text api. Now we have to implement the voice search feature in the Sikhi To The Max app. We can only make changes to the frontend since the app uses BaniDB api as the backend. Obviously we can not put the google-speech-to-text api key in the frontend. So we decided that we will make an intermediate backend. This backend will be made using express. This express app will take audio input and send request to google cloud and return transcript in punjabi. So the frontend will first record audio and send a request to express app that we will develop and after getting the transcript, it will send another request to banidb api to search gurbani. The tech stack that we are using right now is React with TS for frontend and nodeJS for backend. 
+            </p>            
+            <h3 class="mb-0" id="demo-project">Making Demo Project</h3>
+            <p class="lead my-4">
+                For testing purposes, I also decided to make a simple template in express app. The only error I encountered during the development was in calling google api. I was not using the correct request format. Finally I used the following format and it worked:
+
+                <div class="container my-5">
+                    <details>
+                        <summary class="bg-white text-black p-3 rounded">
+                            <h5 >Request Body and Request Format</h5>
+                        </summary>
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Request Body</h5>
+                                <pre class="bg-light p-3 rounded"><code>const apiKey = process.env.GOOGLE_API_KEY;
+const apiEndPoint = `https://speech.googleapis.com/v1/speech:recognize?key=${apiKey}`;
+
+// Set up the request payload for the Google Cloud Speech-to-Text API
+const requestBody = {
+    audio: {
+    content: audioData, // The base64-encoded audio data
+    },
+    config: {
+    encoding: "WEBM_OPUS",
+    sampleRateHertz: 48000,
+    languageCode: "pa-IN", // Punjabi language code
+    },
+};
+                                </code></pre>
+                                
+                                <h5 class="card-title mt-4">Request Format</h5>
+                                <pre class="bg-light p-3 rounded"><code>const fetchModule = await fetch();
+const response = await fetchModule(apiEndPoint, {
+    method: "POST",
+    headers: {
+    "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestBody),
+});
+                                </code></pre>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+                This code takes one parameter called "audioData" that contains the audio data in base64 form and returns a variable called "transcript" which contains the transcript.
+            </p>
+
+            <p class="lead my-4">
+                On the frontend side we read the <a href="https://banidbpy.readthedocs.io/en/latest/searchtype.html">documentation of BaniDB.</a> We are sending requests using search type 2 (Full Word Gurmukhi). After that we are displaying the Name of bani and ang number.
+            </p>
+            <p class="lead my-4">
+                Here is the github repo for the project <a href="https://github.com/dilrajs616/khalis_demo/">Khalis Demo</a>.
+            </p>
+            <h3 class="mb-0" id="hosting-project">Hosting Demo Project</h3>
+            <p class="lead my-4">
+                Finally I tried to deploy the express app but there seems to be some kind of error on vercel server side. I will resolve it tomorrow.
+            </p>
+            <p class="lead my-4">
+                I was trying to host the express backend on vercel. In the process I even created some new errors in my project. The express router seemed to have stopped working randomly without any reason. It lead to me creating the entire project from scratch again in a new directory. Thankfully it was working fine this time. After all this the thing that I learnt about hosting on Vercel is that <b>Vercel only supports serverless projects.</b>. Although there is official documentation available on how to host express apps on vercel. You can read that documentation by <a href="https://vercel.com/guides/using-express-with-vercel">clicking here.</a> But hosting express on vercel only leads to errors. 
+            </p>
+            <p class="lead my-4">
+                I hosted my express backend on <a href="https://render.com/">Render.</a> Here is the <a href="https://render.com/pricing">Render's Pricing Plans.</a> I used the free plan which allocates 512 MB of RAM and only 0.1 CPU. It also deallocates the resources when we do not send requests to the hosted web service. It is quite inconvinient and slow but it works for the demo for mid term evaluation. Here is the link to the Hosted Demo Backend is here: <a href="https://gurbani-search.onrender.com/">https://gurbani-search.onrender.com/</a>
+            </p>
+            <!-- Navigation buttons -->
+            <div class="flex justify-center space-x-4 text-center mb-4 bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">
+                <a href="week1.html">
+                    <button>
+                        1
+                    </button>
+                </a>
+                <a href="week2.html">
+                    <button>
+                        2
+                    </button>
+                </a>
+                <a href="week3.html">
+                    <button>
+                        3
+                    </button>
+                </a>
+                <a href="week4.html">
+                    <button>
+                        4
+                    </button>
+                </a>
+                <a href="week5.html">
+                    <button>
+                        5
+                    </button>
+                </a>
+                <a href="week7.html">
+                    <button>
+                        7
+                    </button>
+                </a>
+                <a href="week8.html">
+                    <button>
+                        8
+                    </button>
+                </a>
+                <a href="week10.html">
+                    <button>
+                        10
+                    </button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center p-4">
+        <p class="m-0">© 2024 Transcript API's Documentations.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+
+</html>

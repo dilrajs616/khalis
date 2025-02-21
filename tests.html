@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Search Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-light center-text">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container mb-auto">
+            <a class="navbar-brand" href="#"><h2 class="text-center m-2">Week 4</h2></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html">Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tests.html">Tested Examples</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+
+    <!-- Hero Section -->
+    <section class="bg-light text-dark text-align-center text-sm-start">
+        <div class="container">
+            <p class="lead my-4">
+                These examples are collected by Simarjot Singh. The inputs were given by him manually in audio format but due to some reason, the audio files were lost. So in this page I am writing the input as "Expected Output". Also midway through we figured that Open AI is not giving accurate results so we stopped testing that.
+            </p>
+            <div class="container my-5">
+                <h2 class="text-center mb-4">Tested Examples</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Input</th>
+                                <th>Webkit</th>
+                                <th>Google API</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਿਹ</td>
+                                <td>ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਿਹ</td>
+                                <td>ਵਾਹਿਗੁਰੂ ਜੀ ਕਾ ਖਾਲਸਾ ਵਾਹਿਗੁਰੂ ਜੀ ਕੀ ਫਤਿਹ</td>
+                            </tr>
+                            <tr>
+                                <td class="output">ਨਿਰਭਉ ਨਿਰਵੈਰ</td>
+                                <td class="webkit">ਨਿਰਭਉ ਨਿਰਵੈਰ</td>
+                                <td class="google">ਨਿਰਭਉ ਨਿਰਵੈਰ</td>
+                            </tr>
+                            <tr>
+                                <td class="output">ਤਵ ਪ੍ਰਸਾਦਿ ਸਵੈਯੇ</td>
+                                <td class="webkit">ਤਵ ਪ੍ਰਸਾਦ ਸਵਈਏ</td>
+                                <td class="google">ਤਵ ਪ੍ਰਸਾਦਿ ਸਵੱਯੇ</td>
+                            </tr>
+                            <tr>
+                                <td class="output">ਸ਼ਬਦ ਹਜਾਰੇ</td>
+                                <td class="webkit">ਸ਼ਬਦ ਹਜਾਰੇ</td>
+                                <td class="google">ਸ਼ਬਦ ਹਜ਼ਾਰੇ</td>
+                            </tr>
+                            <tr>
+                                <td class="output">ਆਹਰ ਸਭਿ ਕਰਦਾ ਫਿਰੈ</td>
+                                <td class="webkit">ਆਹਰ ਸਭ ਕਰਦਾ ਫਿਰੇ</td>
+                                <td class="google">ਆਹਰ ਸਭਿ ਕਰਦਾ ਫਿਰੈ</td>
+                            </tr>
+                            <tr>
+                                <td class="output">ਮਾਣੁ ਮਹਤਾ ਤੇਜੁ ਆਪਣਾ ਆਪਿ ਜਰਿ ॥</td>
+                                <td class="webkit">ਮਨ ਮਹਿਤਾ ਤੇਜ ਆਪਣਾ ਆਪ ਜਰ</td>
+                                <td class="google">ਮਾਣੁ ਮਹਤਾ ਤੇਜੁ ਆਪਣਾ ਆਪਿ ਜਰਿ</td>
+                            </tr><tr>
+                                <td class="output">ਸਰਬ ਕਲਾ ਭਰਪੂਰੁ ਦਿਸੈ ਜਤ ਕਤਾ ॥</td>
+                                <td class="webkit">ਸਰਬ ਕਲਾ ਭਰਪੂਰ ਦਿਸੈ ਜਤ ਕਲਾ</td>
+                                <td class="google">ਸਰਬ ਕਲਾ ਭਰਪੂਰ ਦੀਸੈ ਜਤ ਕਲਾ</td>
+                            </tr><tr>
+                                <td class="output">ਕਬੀਰ ਧਰਤੀ ਸਾਧ ਕੀ</td>
+                                <td class="webkit">ਕਬੀਰ ਧਰਤੀ ਸਾਧ ਕੀ</td>
+                                <td class="google">ਕਬੀਰ ਧਰਤੀ ਸਾਧ ਕੀ</td>
+                            </tr><tr>
+                                <td class="output">ਫਰੀਦਾ ਭੂਮਿ ਰੰਗਾਵਲੀ</td>
+                                <td class="webkit">ਫਰੀਦਾ ਭੂਮਿ ਰੰਗਾਵਲੀ</td>
+                                <td class="google">ਫਰੀਦਾ ਭੂਮਿ ਰੰਗਾਵਲੀ</td>
+                            </tr><tr>
+                                <td class="output">ਸੁਣਿ ਸੁਣਿ ਬੂਝੈ ਮਾਨੈ ਨਾਉ </td>
+                                <td class="webkit">ਸੁਣਿ ਸੁਣਿ ਬੂਝੈ ਮਨ ਨਾਉ</td>
+                                <td class="google">ਸੁਣਿ ਸੁਣਿ ਬੂਝੈ ਮਾਨੈ ਨਾਹੁ</td>
+                            </tr><tr>
+                                <td class="output">ਤੂੰ ਸਮਝਾਵਹਿ ਮੇਲਿ ਮਿਲਾਉ </td>
+                                <td class="webkit">ਤੂੰ ਸਮਝਾਵੇ ਮੇਲ ਮਿਲਾਉ</td>
+                                <td class="google">ਤੂੰ ਸਮਝਾਵੈ ਮੇਲ ਮਿਲਾਏ</td>
+                            </tr><tr>
+                                <td class="output">ਜਾਤੋ ਜਾਇ ਕਹਾ ਤੇ ਆਵੈ</td>
+                                <td class="webkit">ਜੋਤੋ ਜਾਇ ਕਹਾ ਤੇ ਆਵੈ</td>
+                                <td class="google">ਜਾਤੋ ਜਾਇ ਕਹਾ ਤੇ ਆਵੈ</td>
+                            </tr><tr>
+                                <td class="output">ਸਹਜੇ ਆਵੈ ਸਹਜੇ ਜਾਇ ॥</td>
+                                <td class="webkit">ਸਹਜ ਆਵੇ ਸਹਜੇ ਜਾਇ</td>
+                                <td class="google">ਸਹਜੇ ਆਵੈ ਸਹਜੇ ਜਾਇ</td>
+                            </tr><tr>
+                                <td class="output">ਮਨ ਤੇ ਉਪਜੈ ਮਨ ਮਾਹਿ ਸਮਾਇ</td>
+                                <td class="webkit">ਮਨ ਤੇ ਉਪਜੇ ਮਨ ਮਹਿ ਸਮਾਇ</td>
+                                <td class="google">ਮਨ ਤੇ ਉਪਜੈ ਮਨ ਮਾਹਿ ਸਮਾਇ</td>
+                            </tr><tr>
+                                <td class="output">ਘਰਿ ਰਹੁ ਰੇ ਮਨ ਮੁਗਧ ਇਆਨੇ</td>
+                                <td class="webkit">ਘਰਿ ਰਹੁ ਰੇ ਮਨੁ ਮੁਗਧ ਇਆਨੇ</td>
+                                <td class="google">ਘਰਿ ਰਹੁ ਰੇ ਮਨੁ ਮੁਗਧ ਇਆਨਾ</td>
+                            </tr><tr>
+                                <td class="output">ਰਾਮੁ ਜਪਹੁ ਅੰਤਰਗਤਿ ਧਿਆਨੇ</td>
+                                <td class="webkit">ਰਾਮ ਜਪਹੁ ਅੰਤਰਗਤ ਧਿਆਨੇ</td>
+                                <td class="google">ਰਾਮ ਜਪਹੁ ਅੰਤਰਗਤ ਧਿਆਨੇ</td>
+                            </tr><tr>
+                                <td class="output">ਲਾਲਚ ਛੋਡਿ ਰਚਹੁ ਅਪਰੰਪਰਿ </td>
+                                <td class="webkit">ਲਾਲਚ ਛੋੜ ਰਚਹੁ ਅਪਰੰਪਰ</td>
+                                <td class="google">ਲਾਲਚ ਛੋਡੋ ਰਚਹੁ ਅਪਰੰਪਰ</td>
+                            </tr><tr>
+                                <td class="output">ਸਰਣਿ ਪਰੇ ਗੁਰਦੇਵ ਤੁਮਾਰੀ ॥</td>
+                                <td class="webkit">ਸਰਨ ਪਰੇ ਗੁਰਦੇਵ ਤੁਮਾਰੀ</td>
+                                <td class="google">ਸਰਣਿ ਪਰੇ ਗੁਰਦੇਵ ਤੁਮਾਰੇ</td>
+                            </tr><tr>
+                                <td class="output">ਤੂ ਸਮਰਥੁ ਦਇਆਲੁ ਮੁਰਾਰੀ ॥</td>
+                                <td class="webkit">ਟੂ ਸਮਰਾਲ ਦਿਆਲ ਮੁਰਾਰੀ</td>
+                                <td class="google">ਤੂ ਸਮਰਥੁ ਦਿਆਲ ਮੁਰਾਰੇ</td>
+                            </tr><tr>
+                                <td class="output">ਘਟਿ ਘਟਿ ਰੂਪੁ ਅਨੂਪੁ ਦਇਆਲਾ ॥</td>
+                                <td class="webkit">ਘਟ ਘਟ ਰੂਪ ਅਨੂਪ ਦਿਆਲਾ</td>
+                                <td class="google">ਘੱਟੋ-ਘੱਟ ਰੂਪ ਅਨੂਪ ਦਇਆਲਾ</td>
+                            </tr><tr>
+                                <td class="output">ਸਭਿ ਘਟ ਭੋਗੈ ਹਰਿ ਰਸੁ ਪੀਵਨ ॥</td>
+                                <td class="webkit">ਸਭ ਘਟ ਭੋਗਹਿ ਹਰਿ ਰਸੁ ਪੀਵ</td>
+                                <td class="google">ਸਭ ਘਟ ਭੋਗਦਾ ਹਰਿ ਰਸੁ ਪੀਵਤ</td>
+                            </tr><tr>
+                                <td class="output">ਖਿੰਚੋਤਾਣਿ ਕਰਹਿ ਬੇਤਾਲੇ ॥</td>
+                                <td class="webkit">ਖਿੰਚੋਤਾਣ ਕਰਹਿ ਬੇਤਾਲੇ</td>
+                                <td class="google">ਖਿੰਚੋਤਾਣਿ ਕਰਹਿ ਬੇਤਾਲੇ</td>
+                            </tr><tr>
+                                <td class="output">ਸਬਦ ਸੁਰਤਿ ਬਿਨੁ ਆਵੈ ਜਾਵੈ </td>
+                                <td class="webkit">ਸਬਰ ਸੂਰਤ ਬਿਨ ਆਵੈ ਜਾਵੈ</td>
+                                <td class="google">ਸਬਦ ਸੁਰਤਿ ਬਿਨੁ ਆਵੈ ਜਾਵੈ</td>
+                            </tr><tr>
+                                <td class="output">ਕੂੜੁ ਕਲਰੁ ਤਨੁ ਭਸਮੈ ਢੇਰੀ </td>
+                                <td class="webkit">ਕੂੜੋ ਕਲਰ ਤਨ ਭਸਮੈ ਢੇਰੀ</td>
+                                <td class="google">ਕੂੜੁ ਕਲਰ ਤਨ ਭਸਮੈ ਢੇਰੀ</td>
+                            </tr><tr>
+                                <td class="output">ਬਿਨੁ ਨਾਵੈ ਕੈਸੀ ਪਤਿ ਤੇਰੀ ॥</td>
+                                <td class="webkit">ਬਿਨ ਨਾਵੈ ਕੈਸੀ ਪਤ ਤੇਰੀ</td>
+                                <td class="google">ਬਿਨ ਨਾਵੈ ਕੈ ਸੀ ਪਰ ਤੇਰੀ</td>
+                            </tr><tr>
+                                <td class="output">ਜਮ ਦਰਿ ਬਾਧੇ ਮਿਲਹਿ ਸਜਾਈ ॥</td>
+                                <td class="webkit">ਜਮ ਦਰ ਬ ਮਿਲਹੈ ਸਚਾਈ</td>
+                                <td class="google">ਜਮ ਦਰਿ ਬਾਧਉ ਮਿਲੈ ਸਜਾਇ</td>
+                            </tr><tr>
+                                <td class="output">ਤਿਸੁ ਅਪਰਾਧੀ ਗਤਿ ਨਹੀ ਕਾਈ ॥</td>
+                                <td class="webkit">ਤਿਸ ਅਪਰਾਧੀ ਗਤਿ ਨਹੀ ਕਾਈ</td>
+                                <td class="google">ਤਿਸੁ ਅਪਰਾਧੀ ਗਤਿ ਨਹੀ ਕਾਈ</td>
+                            </tr>
+                            <tr>
+                                <td class="output">ਕਰਣ ਪਲਾਵ ਕਰੇ ਬਿਲਲਾਵੈ </td>
+                                <td class="webkit">ਕਰਨ ਪਲਾਵ ਕਰੇ ਬਿਲਾਵ</td>
+                                <td class="google">ਕਰਣ ਪਲਾਵ ਕਰੈ ਬਿਲਲਾਤਉ</td>
+                            </tr><tr>
+                                <td class="output">ਜਮ ਵਸਿ ਕੀਆ ਅੰਧੁ ਦੁਹੇਲਾ</td>
+                                <td class="webkit">ਜਮ ਬਸ ਕੀਆ ਅੰਧੁ ਦੁਹੇਲਾ</td>
+                                <td class="google">ਜਮ ਵਸਿ ਕੀਆ ਅੰਧੁ ਦੁਹੇਲਾ</td>
+                            </tr><tr>
+                                <td class="output">ਰਾਮ ਨਾਮ ਬਿਨੁ ਮੁਕਤਿ ਨ ਸੂਝੈ</td>
+                                <td class="webkit">ਰਾਮ ਨਾਮ ਬਿਨੁ ਮੁਕਤਿ ਨ ਸੂਝੈ</td>
+                                <td class="google">ਰਾਮ ਨਾਮ ਬਿਨ ਮੁਕਤ ਨਾ ਸੁੱਝੇ</td>
+                            </tr><tr>
+                                <td class="output">ਸਤਿਗੁਰ ਬਾਝੁ ਨ ਬੇਲੀ ਕੋਈ ॥</td>
+                                <td class="webkit">ਸਤਿਗੁਰ ਭਾਜੂ ਨਾ ਬੇਲੀ ਕੋਈ</td>
+                                <td class="google">ਸਤਿਗੁਰ ਬਾਝੁ ਨ ਬੇਲੀ ਹੋਇ</td>
+                            </tr><tr>
+                                <td class="output">ਐਥੈ ਓਥੈ ਰਾਖਾ ਪ੍ਰਭੁ ਸੋਈ ॥</td>
+                                <td class="webkit">ਇਥੇ ਉੱਥੇ ਰਾਖਾ ਪ੍ਰਭ ਸੋਈ</td>
+                                <td class="google">ਐਥੇ ਓਥੇ ਰਾਖਾ ਪ੍ਰਭੁ ਸੋਇ</td>
+                            </tr><tr>
+                                <td class="output">ਰਾਮ ਨਾਮੁ ਦੇਵੈ ਕਰਿ ਕਿਰਪਾ</td>
+                                <td class="webkit">ਰਾਮ ਨਾਮੁ ਦੇਵੈ ਕਰੇ ਕਿਰਪਾ </td>
+                                <td class="google">ਰਾਮ ਨਾਮੁ ਦੇਵਾ ਕਰਿ ਕਿਰਪਾ</td>
+                            </tr><tr>
+                                <td class="output">ਅਬ ਮੋਹਿ ਸਰਬ ਉਪਾਵ ਬਿਰਕਾਤੇ ॥</td>
+                                <td class="webkit">ਅਬ ਮੋਹਿ ਸਰਬ ਉਪਵਾਕ ਬਿਕਾਰ ਤੇ</td>
+                                <td class="google">ਅਬ ਮੋਹਿ ਸਰਬ ਉਪਾਵ ਬਿਰਕਾਤੇ</td>
+                            </tr><tr>
+                                <td class="output">ਕਰਣ ਕਾਰਣ ਸਮਰਥ ਸੁਆਮੀ ਹਰਿ ਏਕਸੁ ਤੇ ਮੇਰੀ ਗਾਤੇ ॥</td>
+                                <td class="webkit">ਕਰਨ ਕਰਣ ਸਮਰਥ ਸੁਆਮੀ ਹਰਿ ਏਕਸ ਤੇ ਮੇਰੀ ਗਤੇ</td>
+                                <td class="google">ਕਰਣ ਕਾਰਣ ਸਮਰਥ ਸੁਆਮੀ ਹਰਿ ਇਕਸੁ ਤੇ ਮੇਰੀ ਗਾ</td>
+                            </tr><tr>
+                                <td class="output">ਅਬ ਮੋਹਿ ਲਬਧਿਓ ਹੈ ਹਰਿ ਟੇਕਾ</td>
+                                <td class="webkit">ਅਬ ਮੋਹੁ ਲਭਾ ਤੀਓ ਹੈ ਹਰ ਟੇਕਾ</td>
+                                <td class="google">ਅਬ ਮੋਹਿ ਲਬਧਿਓ ਹੈ ਹਰ ਟੇਕਾ</td>
+                            </tr><tr>
+                                <td class="output">ਗੁਰ ਦਇਆਲ ਭਏ ਸੁਖਦਾਈ </td>
+                                <td class="webkit">ਗੁਰ ਦਿਆਲ ਭਏ ਸੁਖਦਾਈ</td>
+                                <td class="google">ਗੁਰ ਦਇਆਲ ਭਏ ਸੁਖਦਾਈ  </td>
+                            </tr><tr>
+                                <td class="output">ਜਿਉ ਜਲ ਤਰੰਗ ਫੇਨੁ ਜਲ ਹੋਈ ਹੈ</td>
+                                <td class="webkit">ਜੀਓ ਜਲ ਤਰੰਗ ਫਿਨ ਜਲ ਹੋਈ ਹੈ</td>
+                                <td class="google">ਜਿਉ ਜਲ ਤਰੰਗ ਫਿਰ ਜਲ ਹੋਈ ਹੈ</td>
+                            </tr><tr>
+                                <td class="output">ਸੇਵਕ ਠਾਕੁਰ ਭਏ ਏਕਾ </td>
+                                <td class="webkit">ਸੇਵਕ ਠਾਕੁਰ ਭਾਏ ਏਕ</td>
+                                <td class="google">ਸੇਵਕੁ ਠਾਕੁਰੁ ਹੈ ਏਕਾ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center p-4">
+        <p class="m-0">© 2024 Transcript API's Documentations.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+
+</html>

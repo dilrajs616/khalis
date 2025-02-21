@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Search Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-light center-text">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container mb-auto">
+            <a class="navbar-brand" href="#"><h2 class="text-center m-2">Week 7</h2></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html">Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tests.html">Tested Examples</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+
+    <!-- Hero Section -->
+    <section class="bg-light text-dark text-align-center text-sm-start">
+        <div class="container">
+            
+            <h3 class="mb-0" id="">Starting Implementation</h3>
+            <p class="lead my-4">
+                Now finally we could start implementing. But it's not just about implementing the voice search feature into Sikhi To The Max app. We have to make a accessible solution that any developer can use to implement this feature in their app. Most importantly to implement this feature in other apps of Khalis Foundation. We have two major options. First is to make a github repo which developers can clone and copy paste the code in their app. Second app is to make an npm package. Developers can simply install this package and use without worrying about anything. Obviously second option is way better. So the first step is to make an npm package.
+            </p>
+
+            <h3 class="mb-0">Planning NPM Package</h3>
+            <p class="lead my-4">
+                We read the documentation of how to publish an npm package. Turned out it is simpler than it sounds. <a href="https://www.freecodecamp.org/news/how-to-create-and-publish-your-first-npm-package/">Here is the steps to create your own npm package.</a> Then we decided what kind of package are we going to make. Over a meeting me and Simarjot decided that we are going to make a "mic component". As explained <a href="week5.html#table">here</a> this component will take two parameters and return transcript based on input parameters. This component should also be completely customizable so we do not restrict developer in any way. Also it should be compatible with js and ts both. So we decided to make the package using TypeScript. 
+            </p>
+
+            <h3 class="mb-0">Creating NPM Package</h3>
+            <p class="lead my-4">The documentation provided in above paragraph tells how to make an npm package that simply calls a function to print "Hello World". But obviously we need more than that. So here is the link to a <a href="https://chatgpt.com/share/670aae15-5620-8005-86e1-2a5fa79aa044">ChatGPT conversation</a> that explains the steps to create a component using TypeScript and publish it as npm package. We made this <a href="https://github.com/dilrajs616/npm-package">Github Repo.</a> The mic component was successfully created. We tested it by importing it in a local project. It has following customizable variables: </p>
+            <div class="container my-5">
+                <details>
+                    <summary class="bg-white text-black p-3 rounded"><h5 class="mb-0">Customization Of Component</h5>
+                    </summary>
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <pre class="bg-light p-3 rounded"><code>interface Props {
+    Mic?: React.ElementType;
+    activeMicColor?: string;
+    micDefaultColor?: string;
+    micDefaultBGColor?: string;
+    micActiveBGColor?: string;
+    micSize?: number;
+    borderRadius?: string;
+    searchType: string;
+}
+                            </code></pre>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <p class="lead my-4">
+                Just like our Demo Project this project is first sending the audio data to the <a href="week4.html#demo-project">express backend.</a> It simply returns the transcript in a variable called "transcript". The only problem that we are facing right now is with<a href="week4.html#hosting-project"> the hosted backend.</a> It was hosted on Render at <a href="https://gurbani-search.onrender.com/">https://gurbani-search.onrender.com/</a> Response from Render are pretty slow. So we were using localhost for testing. But we can not use either of them in the final npm package. So we have to find alternative way to host the express app. We will explore this further in <a href="week8.html">Week 8.</a>
+            </p>
+
+            <!-- Navigation buttons -->
+            <div class="flex justify-center space-x-4 text-center mb-4 bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">
+                <a href="week1.html">
+                    <button>
+                        1
+                    </button>
+                </a>
+                <a href="week2.html">
+                    <button>
+                        2
+                    </button>
+                </a>
+                <a href="week3.html">
+                    <button>
+                        3
+                    </button>
+                </a>
+                <a href="week4.html">
+                    <button>
+                        4
+                    </button>
+                </a>
+                <a href="week5.html">
+                    <button>
+                        5
+                    </button>
+                </a>
+                <a href="week7.html">
+                    <button>
+                        7
+                    </button>
+                </a>
+                <a href="week8.html">
+                    <button>
+                        8
+                    </button>
+                </a>
+                <a href="week10.html">
+                    <button>
+                        10
+                    </button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center p-4">
+        <p class="m-0">© 2024 Transcript API's Documentations.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+
+</html>

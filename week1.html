@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebKit & Bhashini</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-light center-text">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container mb-auto">
+            <a class="navbar-brand" href="#"><h2 class="text-center m-2">Week One</h2></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html">Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tests.html">Tested Examples</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<br>
+
+    <!-- Hero Section -->
+    <section class="bg-light text-dark text-align-center text-sm-start">
+        <div class="container">
+            <div class="d-sm-flex align-items-center justify-content-between">
+                <div>
+                    <h1>Welcome to <span class="text-primary">Transcript api Documentation</span></h1>
+                    <p class="lead my-4">
+                        As an intern at <a href="https://khalisfoundation.org/">Khalis Foundation</a>, me (Dilraj Singh) and my teammate Simarjot Singh, are assigned with the project of implementing the voice search feature in apps developed by said foundation. These apps include Sikhi To The Max and Sunder Gutka. Our task is to find the best transcript api that will give the most accurate results for Punjabi language.
+                    </p>
+                    <p class="lead my-4">
+                        This documentation will explain all the steps that we followed so it would be easier for fellow developers to find the best transcript api and easily implement in their own apps.
+                    </p>
+                    <h3>Web Kit Speech Recognition</h3>
+                    <p class="lead my-4">
+                        The most obvious solution that comes to mind is Web Kit Speech Recognition. This is a web speech api. It is very easy to implement. We don't need an api key to use it. It is very fast. It generates accurate results most of the times. And it supports Punjabi language as well. The only problem is that this is browser based. It can easily be used in web applications but to use it in native environment, we have to find some workarounds. Also it is not supported by all browsers. It primarily works in Chrome and some Chromium-based browsers. <a href="https://github.com/dilrajs616/khalis/blob/main/jsnode/speechRecog.html">Here</a> is a very simple code that you can use to implement this feature. <br>You can read it's complete <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API">documentation here.</a>
+                    </p>
+                    <h3>Bhashini AI</h3>
+                    <p class="lead my-4">
+                        Bhashini AI is official LLM(Large Language Model) for indian languages by Indian Govt. It supports mostly all the indian languages and it provides several services like asr (Automated Speech Recognition), text-to-speech etc. You can see the <a href="https://bhashini.gov.in/services">complete list</a> of services and their supported languages.
+                    </p>
+                    <p class="lead my-4">
+                        First you have to register yourself to Bhashini AI. Follow steps <a href="https://bhashini.gitbook.io/bhashini-apis/pre-requisites-and-onboarding">on this page</a> to register and get api key and user id. Api key and user id both are required for api calls. See the <a href="https://www.loc.gov/standards/iso639-2/php/code_list.php">Language codes here.</a>
+                    </p>
+
+                    <div class="container my-5">
+                        <h2 class="text-center mb-4">Pipeline Information</h2>
+                        Now this step is important. Bhashini have divided their services into pipelines. They have two pipelines. For using a services you need pipeline id and endpoint.
+                        <div class="table-responsive p-4">
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th>Pipeline Name</th>
+                                        <th>Pipeline ID</th>
+                                        <th>Available Services</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>MeitY</td>
+                                        <td>64392f96daac500b55c543cd</td>
+                                        <td>
+                                            <ul class="list-unstyled mb-0">
+                                                <li>[ASR]</li>
+                                                <li>[NMT]</li>
+                                                <li>[TTS]</li>
+                                                <li>[ASR+NMT]</li>
+                                                <li>[NMT+TTS]</li>
+                                                <li>[ASR+NMT+TTS]</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>AI4Bharat</td>
+                                        <td>643930aa521a4b1ba0f4c41d</td>
+                                        <td>
+                                            <ul class="list-unstyled mb-0">
+                                                <li>[NMT]</li>
+                                                <li>[TTS]</li>
+                                                <li>[NMT+TTS]</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="container my-5">
+                        <h2 class="text-center mb-4">Additional Headers</h2>
+                        <div class="table-responsive ">
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>userID</td>
+                                        <td>Your user id</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ulcaApiKey</td>
+                                        <td>Your user id</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <p class="lead my-4">
+                        Now you should have api key, user id and pipeline id. Now you need endpoint and request format. Refer the following
+                    </p>
+                    <div class="container my-5">
+                        <details>
+                            <summary class="bg-white text-black p-3 rounded">
+                                <h5 >API Endpoint and Request Format</h5>
+                            </summary>
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Endpoint</h5>
+                                    <pre class="bg-light p-3 rounded"><code>https://meity-auth.ulcacontrib.org/ulca/apis/v0/model/getModelsPipeline</code></pre>
+                                    
+                                    <h5 class="card-title mt-4">Request Format</h5>
+                                    <pre class="bg-light p-3 rounded"><code>{
+    "pipelineTasks": [
+        {
+            "taskType": "asr",
+            "config": {
+                "language": {
+                    "sourceLanguage": "xx"
+                }
+            }
+        },
+        {
+            "taskType": "translation",
+            "config": {
+                "language": {
+                    "sourceLanguage": "xx",
+                    "targetLanguage": "yy"
+                }
+            }
+        },
+        {
+            "taskType": "tts",
+            "config": {
+                "language": {
+                    "sourceLanguage": "yy"
+                }
+            }
+        }
+    ],
+    "pipelineRequestConfig": {
+        "pipelineId" : "xxxx8d51ae52cxxxxxxxx"
+    }
+}</code></pre>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                    <div class="container my-5">
+                        <details>
+                            <summary class="bg-white text-black p-3 rounded"><h5 class="mb-0">Response from Endpoint</h5>
+                            </summary>
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <pre class="bg-light p-3 rounded"><code>{
+    "languages": [
+        {
+            "sourceLanguage": "gu",
+            "targetLanguageList": [
+                "bn"
+            ]
+        }
+    ],
+    "pipelineResponseConfig": [
+        {
+            "taskType": "asr",
+            "config": [
+                {
+                    "serviceId": "ai4bharat/conformer-multilingual-indo_aryan-gpu--t4",
+                    "modelId": "6411746056e9de23f65b5425",
+                    "language": {
+                        "sourceLanguage": "gu"
+                    },
+                    "domain": [
+                        "general"
+                    ]
+                }
+            ]
+        },
+        {
+            "taskType": "translation",
+            "config": [
+                {
+                    "serviceId": "ai4bharat/indictrans-fairseq-i2i-gpu--t4",
+                    "modelId": "62023eeb3fc51c3fe32b8c5b",
+                    "language": {
+                        "sourceLanguage": "gu",
+                        "targetLanguage": "bn"
+                    }
+                }
+            ]
+        },
+        {
+            "taskType": "tts",
+            "config": [
+                {
+                    "serviceId": "ai4bharat/indic-tts-coqui-indo_aryan-gpu--t4",
+                    "modelId": "636e60e586369150cb00432a",
+                    "language": {
+                        "sourceLanguage": "bn"
+                    },
+                    "supportedVoices": [
+                        "male",
+                        "female"
+                    ]
+                }
+            ]
+        }
+    ],
+    "pipelineInferenceAPIEndPoint": {
+        "callbackUrl": "https://dhruva-api.bhashini.gov.in/services/inference/pipeline",
+        "inferenceApiKey": {
+            "name": "Authorization",
+            "value": "m-LTAzxQVp6jjznmSR5RgKM"
+        },
+        "isMultilingualEnabled": true,
+        "isSyncApi": true
+    }
+}</code></pre>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                    <p class="lead my-4">
+                        Now I know this is looking scary and there are a lot of things to keep track of. But let's understand it in simple way. We basically asked the pipeline <i> "Can we use xyz service for xyz language?"</i> We basically configured the pipeline for a specific task. If that task is not available in that language or in that specific order then you will recieve a "400 BAD REQUEST" error response. In normal cases pipeline responds with a very long response but we are interested in only 4 things in it.
+                    </p>
+                    <ul>
+                        <li>auth parameter key: This value is obtained from name parameter under inferenceApiKey under pipelineInferenceAPIEndPoint.</li>
+                        <li>auth parameter value: This value is obtained from value parameter under inferenceApiKey under pipelineInferenceAPIEndPoint.</li>
+                        <li>service id: This value is obtained from serviceId parameter under config under pipeLineResponseConfig</li>
+                        <li>callbackUrl: This value is obtained from callbackUrl parameter under pipelineInferenceAPIEndPoint</li>
+                    </ul>
+                    <p class="lead my-4">
+                        This callbackUrl is the new endpoint where we will send the final api call. For this we need the 3 other things mentioned in above list and one audio data. You need to convert the audio data into base 64 and then send this base64 data to endpoint.
+                    </p>
+                    <div class="container my-5">
+                        <h2 class="text-center mb-4">Additional Headers</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>auth parameter key</td>
+                                        <td>key obtained from pipeline response</td>
+                                    </tr>
+                                    <tr>
+                                        <td>auth parameter value</td>
+                                        <td>value obtained from pipeline response</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="container my-5">
+                        <details>
+                            <summary class="bg-white text-black p-3 rounded">
+                                <h5 >Final Endpoint Call</h5>
+                            </summary>
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Endpoint</h5>
+                                    <pre class="bg-light p-3 rounded"><code>callbackUrl obtained from pipeline response</code></pre>
+                                    
+                                    <h5 class="card-title mt-4">Request Format</h5>
+                                    <pre class="bg-light p-3 rounded"><code>{
+    "pipelineTasks": [
+        {
+            "taskType": "asr",
+            "config": {
+                "language": {
+                    "sourceLanguage": "xx"
+                },
+                "serviceId": "xxxxx--ssssss-d-ddd--dddd",
+                "audioFormat": "wav",
+                "samplingRate": 16000
+            }
+        }
+    ],
+    "inputData": {
+        "input": [
+            {
+                "source": null
+            }
+        ],
+        "audio": [
+            {
+                "audioContent": "{{generated_base64_content}}"
+            }
+        ]
+    }
+}</code></pre>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                    <p class="lead my-4">
+                        Finally after doing all this this api's response is neither fast nor accurate. You can check it's implementation <a href="https://github.com/dilrajs616/bhashini_wrapper/">in this repo.</a>. Obviously this was very complicated. I tried my best to keep it as simple as possible. I left out some details that are not important for beginners.
+                    </p>
+                    <p class="lead my-4">
+                        If you hate your life and you decided to implement this api and you are getting any error that is not mentioned in my brief documentation then you can read the complete documentation <a href="https://bhashini.gitbook.io/bhashini-apis">on this website.</a>
+                    </p>
+
+        <!-- Navigation buttons -->
+        <div class="flex justify-center space-x-4 text-center mb-4 bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">
+            <a href="week1.html">
+                <button>
+                    1
+                </button>
+            </a>
+            <a href="week2.html">
+                <button>
+                    2
+                </button>
+            </a>
+            <a href="week3.html">
+                <button>
+                    3
+                </button>
+            </a>
+            <a href="week4.html">
+                <button>
+                    4
+                </button>
+            </a>
+            <a href="week5.html">
+                <button>
+                    5
+                </button>
+            </a>
+            <a href="week7.html">
+                <button>
+                    7
+                </button>
+            </a>
+            <a href="week8.html">
+                <button>
+                    8
+                </button>
+            </a>
+            <a href="week10.html">
+                <button>
+                    10
+                </button>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center p-4">
+        <p class="m-0">© 2024 Transcript API's Documentations.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
